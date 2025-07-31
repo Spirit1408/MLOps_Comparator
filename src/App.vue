@@ -1,6 +1,10 @@
-<script setup></script>
+<script setup>
+import MainTitle from "./components/MainTitle/MainTitle.vue";
+import UploadField from "./components/UploadField/UploadFiled.vue";
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>Some text</p>
+  <MainTitle />
+
+  <UploadField />
 </template>
