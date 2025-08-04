@@ -1,8 +1,8 @@
 <script setup>
-import { useExperientsStore } from '@/stores/experimentsStore'
+import { useExperimentsStore } from '@/stores/experimentsStore'
 import { computed } from 'vue'
 
-const experimentsStore = useExperientsStore()
+const experimentsStore = useExperimentsStore()
 
 const isDataLoaded = computed(() => experimentsStore.isDataLoaded)
 const isLoading = computed(() => experimentsStore.isLoading)

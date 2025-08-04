@@ -1,13 +1,13 @@
 <script setup>
 import InputFile from './InputFile/InputFile.vue'
 import { ref } from 'vue'
-import { useExperientsStore } from '@/stores/experimentsStore'
+import { useExperimentsStore } from '@/stores/experimentsStore'
 import { parseCSV } from '@/utils/parseCSV'
 
 const fileInfo = ref(null)
 const error = ref(null)
 
-const experimentsStore = useExperientsStore()
+const experimentsStore = useExperimentsStore()
 
 const handleFileSelected = async (selectedFileInfo) => {
   fileInfo.value = selectedFileInfo

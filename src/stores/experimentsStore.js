@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
-export const useExperientsStore = defineStore('experients', () => {
+export const useExperimentsStore = defineStore('experients', () => {
   const rawData = ref([])
   const isDataLoaded = ref(false)
   const isLoading = ref(false)
