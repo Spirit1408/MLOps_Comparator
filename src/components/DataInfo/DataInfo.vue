@@ -43,6 +43,11 @@ const fileName = computed(() => experimentsStore.fileName)
           <span class="text-gray-300">Total amount of steps:</span>
           <span class="font-medium">{{ stats.maxStep }}</span>
         </div>
+
+        <div class="flex justify-between items-center border-b border-gray-600 pb-2">
+          <span class="text-gray-300">Total amount of data points:</span>
+          <span class="font-medium">{{ stats.totalDataPoints }}</span>
+        </div>
       </div>
     </div>
   </div>
