@@ -1,18 +1,27 @@
 <script setup>
-import { ref } from 'vue'
+import { computed } from 'vue'
 import DataChart from './DataChart/DataChart.vue'
+import { useExperimentsStore } from '@/stores/experimentsStore'
 
-const isDataLoaded = ref(true)
+const experimentsStore = useExperimentsStore()
+
+const isDataLoaded = computed(() => experimentsStore.isDataLoaded)
+const isLoading = computed(() => experimentsStore.isLoading)
+const metrics = computed(() => experimentsStore.metricNames)
 </script>
 
 <template>
   <div class="p-5 rounded-lg max-w-[30%] w-full mx-auto border border-gray-400 bg-[#3C3C3C]">
-    <div v-if="!isDataLoaded" class="h-[200px] flex items-center justify-center">
+    <div v-if="!isDataLoaded && !isLoading" class="h-[200px] flex items-center justify-center">
       <p class="text-gray-400">Charts will be displayed here...</p>
     </div>
 
-    <div v-else class="h-[200px] flex flex-col gap-5">
-      <DataChart />
+    <div v-else-if="isLoading" class="h-[200px] flex items-center justify-center">
+      <p class="text-green-400">Loading data from file...</p>
+    </div>
+
+    <div v-else class="flex flex-col gap-5">
+      <DataChart v-for="metric in metrics" :key="metric" />
     </div>
   </div>
 </template>

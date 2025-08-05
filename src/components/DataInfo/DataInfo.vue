@@ -12,7 +12,7 @@ const fileName = computed(() => experimentsStore.fileName)
 
 <template>
   <div class="p-5 rounded-lg max-w-[30%] w-full mx-auto border border-gray-400 bg-[#3C3C3C]">
-    <div v-if="isLoading" class="max-h-[200px] flex items-center justify-center">
+    <div v-if="isLoading" class="h-[200px] flex items-center justify-center">
       <p class="text-green-400">Loading data from file...</p>
     </div>
 
