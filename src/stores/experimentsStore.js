@@ -101,12 +101,112 @@ export const useExperimentsStore = defineStore('experiments', () => {
     fileSize.value = ''
   }
 
-  function getExperimentMetricData(experimentId, metricName) {
+  const getExperimentMetricData = function (experimentId, metricName) {
     if (!rawData.value || !rawData.value.length) return []
 
     return rawData.value
       .filter((item) => item.experiment_id === experimentId && item.metric_name === metricName)
       .sort((a, b) => Number(a.step) - Number(b.step))
+      .map((item) => ({
+        x: Number(item.step),
+        y: Number(item.value),
+      }))
+  }
+
+  const optimizeDataPoints = function (data, detailLevel = 'overview') {
+    if (!data || data.length === 0) return data
+
+    let maxPoints
+    switch (detailLevel) {
+      case 'overview':
+        maxPoints = 500
+        break
+      case 'medium':
+        maxPoints = 2000
+        break
+      case 'detailed':
+        maxPoints = 8000
+        break
+      case 'full':
+        return data
+      case 'auto':
+      default:
+        if (data.length <= 1000) return data
+        if (data.length <= 5000) maxPoints = 1500
+        else if (data.length <= 15000) maxPoints = 3000
+        else maxPoints = 5000
+        break
+    }
+
+    if (data.length <= maxPoints) return data
+
+    const step = Math.ceil(data.length / maxPoints)
+    const decimatedData = []
+
+    decimatedData.push(data[0])
+    for (let i = step; i < data.length - 1; i += step) {
+      decimatedData.push(data[i])
+    }
+
+    if (data.length > 1) {
+      decimatedData.push(data[data.length - 1])
+    }
+
+    return decimatedData
+  }
+
+  const getMetricChartData = function (metricName, visibleExperiments, detailLevel = 'overview') {
+    if (!rawData.value || !rawData.value.length || !visibleExperiments) {
+      return { datasets: [] }
+    }
+
+    const datasets = []
+    const colors = [
+      '#3B82F6',
+      '#EF4444',
+      '#10B981',
+      '#F59E0B',
+      '#8B5CF6',
+      '#06B6D4',
+      '#F97316',
+      '#84CC16',
+      '#EC4899',
+      '#6366F1',
+    ]
+
+    experimentIds.value.forEach((experimentId, index) => {
+      if (!visibleExperiments.has(experimentId)) return
+
+      const rawDataPoints = getExperimentMetricData(experimentId, metricName)
+      if (rawDataPoints.length === 0) return
+
+      const optimizedData = optimizeDataPoints(rawDataPoints, detailLevel)
+
+      datasets.push({
+        label: experimentId,
+        data: optimizedData,
+        borderColor: colors[index % colors.length],
+        backgroundColor: colors[index % colors.length] + '20',
+        borderWidth: 2,
+        fill: false,
+        tension: 0.1,
+        pointRadius: optimizedData.length > 100 ? 0 : 2,
+        pointHoverRadius: 4,
+      })
+    })
+
+    return { datasets }
+  }
+
+  const getDataStats = function (metricName, experimentId) {
+    const data = getExperimentMetricData(experimentId, metricName)
+    return {
+      totalPoints: data.length,
+      firstStep: data.length > 0 ? data[0].x : 0,
+      lastStep: data.length > 0 ? data[data.length - 1].x : 0,
+      minValue: data.length > 0 ? Math.min(...data.map((d) => d.y)) : 0,
+      maxValue: data.length > 0 ? Math.max(...data.map((d) => d.y)) : 0,
+    }
   }
 
   return {
@@ -124,5 +224,8 @@ export const useExperimentsStore = defineStore('experiments', () => {
     setRawData,
     clearRawData,
     getExperimentMetricData,
+    optimizeDataPoints,
+    getMetricChartData,
+    getDataStats,
   }
 })

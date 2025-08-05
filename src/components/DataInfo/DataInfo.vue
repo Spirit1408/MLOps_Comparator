@@ -12,7 +12,7 @@ const fileName = computed(() => experimentsStore.fileName)
 </script>
 
 <template>
-  <div class="p-5 rounded-lg max-w-[30%] w-full mx-auto border border-gray-400 bg-[#3C3C3C]">
+  <div class="p-5 rounded-lg max-w-[500px] w-full mx-auto border border-gray-400 bg-[#3C3C3C]">
     <div v-if="isLoading" class="h-[200px] flex items-center justify-center">
       <SLoader />
     </div>

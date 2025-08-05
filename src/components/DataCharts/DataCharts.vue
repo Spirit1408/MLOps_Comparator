@@ -12,7 +12,7 @@ const metrics = computed(() => experimentsStore.metricNames)
 </script>
 
 <template>
-  <div class="p-5 rounded-lg max-w-[30%] w-full mx-auto border border-gray-400 bg-[#3C3C3C]">
+  <div class="p-5 rounded-lg max-w-[1000px] w-full mx-auto border border-gray-400 bg-[#3C3C3C]">
     <div v-if="!isDataLoaded && !isLoading" class="h-[200px] flex items-center justify-center">
       <p class="text-gray-400">Charts will be displayed here...</p>
     </div>
@@ -22,7 +22,7 @@ const metrics = computed(() => experimentsStore.metricNames)
     </div>
 
     <div v-else class="flex flex-col gap-5">
-      <DataChart v-for="metric in metrics" :key="metric" />
+      <DataChart v-for="metric in metrics" :key="metric" :metric-name="metric" />
     </div>
   </div>
 </template>

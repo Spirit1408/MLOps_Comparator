@@ -41,7 +41,7 @@ const handleFileError = (errorMessage) => {
 </script>
 
 <template>
-  <div class="p-5 rounded-lg w-[30%] mx-auto border border-gray-400 bg-[#3C3C3C]">
+  <div class="p-5 rounded-lg max-w-[500px] w-full mx-auto border border-gray-400 bg-[#3C3C3C]">
     <p class="text-center mb-5">Click or drag & drop CSV file to analyze</p>
 
     <InputFile @file-selected="handleFileSelected" @file-error="handleFileError" />
