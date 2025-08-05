@@ -12,7 +12,9 @@ const experimentsStore = useExperimentsStore()
 const handleFileSelected = async (selectedFileInfo) => {
   fileInfo.value = selectedFileInfo
   error.value = null
-  experimentsStore.setLoading(true)
+
+  experimentsStore.setInfoLoading(true)
+  experimentsStore.setChartsLoading(true)
 
   try {
     experimentsStore.setFileInfo(selectedFileInfo.name, selectedFileInfo.size)
@@ -21,6 +23,12 @@ const handleFileSelected = async (selectedFileInfo) => {
 
     if (parsedData && parsedData.length > 0) {
       experimentsStore.setRawData(parsedData)
+
+      experimentsStore.setInfoLoading(false)
+
+      await new Promise((resolve) => setTimeout(resolve, 500))
+
+      experimentsStore.setChartsLoading(false)
     } else {
       throw new Error('No data was parsed from the CSV file')
     }
@@ -28,8 +36,9 @@ const handleFileSelected = async (selectedFileInfo) => {
     console.error('Error processing file:', err)
     error.value = err.message || 'Failed to process file'
     experimentsStore.clearRawData()
-  } finally {
-    experimentsStore.setLoading(false)
+
+    experimentsStore.setInfoLoading(false)
+    experimentsStore.setChartsLoading(false)
   }
 }
 

@@ -6,14 +6,14 @@ import SLoader from '@/components/SLoader/SLoader.vue'
 const experimentsStore = useExperimentsStore()
 
 const isDataLoaded = computed(() => experimentsStore.isDataLoaded)
-const isLoading = computed(() => experimentsStore.isLoading)
+const isInfoLoading = computed(() => experimentsStore.isInfoLoading)
 const stats = computed(() => experimentsStore.stats)
 const fileName = computed(() => experimentsStore.fileName)
 </script>
 
 <template>
   <div class="p-5 rounded-lg max-w-[500px] w-full mx-auto border border-gray-400 bg-[#3C3C3C]">
-    <div v-if="isLoading" class="h-[200px] flex items-center justify-center">
+    <div v-if="isInfoLoading" class="h-[200px] flex items-center justify-center">
       <SLoader />
     </div>
 

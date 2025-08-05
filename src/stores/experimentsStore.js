@@ -4,7 +4,8 @@ import { ref, computed } from 'vue'
 export const useExperimentsStore = defineStore('experiments', () => {
   const rawData = ref([])
   const isDataLoaded = ref(false)
-  const isLoading = ref(false)
+  const isInfoLoading = ref(false)
+  const isChartsLoading = ref(false)
   const fileName = ref('')
   const fileSize = ref('')
 
@@ -54,8 +55,12 @@ export const useExperimentsStore = defineStore('experiments', () => {
     }
   })
 
-  function setLoading(status) {
-    isLoading.value = status
+  function setInfoLoading(status) {
+    isInfoLoading.value = status
+  }
+
+  function setChartsLoading(status) {
+    isChartsLoading.value = status
   }
 
   function setFileInfo(name, size) {
@@ -212,14 +217,16 @@ export const useExperimentsStore = defineStore('experiments', () => {
   return {
     rawData,
     isDataLoaded,
-    isLoading,
+    isInfoLoading,
+    isChartsLoading,
     fileName,
     fileSize,
     experimentIds,
     metricNames,
     maxStep,
     stats,
-    setLoading,
+    setInfoLoading,
+    setChartsLoading,
     setFileInfo,
     setRawData,
     clearRawData,
