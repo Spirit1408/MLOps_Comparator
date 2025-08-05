@@ -86,9 +86,7 @@ const handleDrop = (event) => {
   <div
     :class="[
       'flex items-center justify-center cursor-pointer transition-colors duration-200 p-8 border-2 border-dashed rounded-lg',
-      isDragOver
-        ? 'border-green-400 bg-green-50 dark:bg-green-900/20'
-        : 'border-[#05FF0D]',
+      isDragOver ? 'border-green-400 bg-green-50 dark:bg-green-900/20' : 'border-[#05FF0D]',
     ]"
     @click="handleClick"
     @dragenter="handleDragEnter"

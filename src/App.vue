@@ -1,8 +1,8 @@
 <script setup>
-import MainTitle from "./components/MainTitle/MainTitle.vue";
-import UploadField from "./components/UploadField/UploadField.vue";
-import LogsData from "./components/DataInfo/DataInfo.vue";
-import DataCharts from "./components/DataCharts/DataCharts.vue";
+import MainTitle from './components/MainTitle/MainTitle.vue'
+import UploadField from './components/UploadField/UploadField.vue'
+import LogsData from './components/DataInfo/DataInfo.vue'
+import DataCharts from './components/DataCharts/DataCharts.vue'
 </script>
 
 <template>
