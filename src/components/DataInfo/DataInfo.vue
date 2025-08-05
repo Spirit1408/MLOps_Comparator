@@ -1,6 +1,7 @@
 <script setup>
 import { useExperimentsStore } from '@/stores/experimentsStore'
 import { computed } from 'vue'
+import SLoader from '@/components/SLoader/SLoader.vue'
 
 const experimentsStore = useExperimentsStore()
 
@@ -13,7 +14,7 @@ const fileName = computed(() => experimentsStore.fileName)
 <template>
   <div class="p-5 rounded-lg max-w-[30%] w-full mx-auto border border-gray-400 bg-[#3C3C3C]">
     <div v-if="isLoading" class="h-[200px] flex items-center justify-center">
-      <p class="text-green-400">Loading data from file...</p>
+      <SLoader />
     </div>
 
     <div v-else-if="!isDataLoaded" class="h-[200px] flex items-center justify-center">

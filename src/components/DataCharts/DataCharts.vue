@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import DataChart from './DataChart/DataChart.vue'
 import { useExperimentsStore } from '@/stores/experimentsStore'
+import SLoader from '@/components/SLoader/SLoader.vue'
 
 const experimentsStore = useExperimentsStore()
 
@@ -17,7 +18,7 @@ const metrics = computed(() => experimentsStore.metricNames)
     </div>
 
     <div v-else-if="isLoading" class="h-[200px] flex items-center justify-center">
-      <p class="text-green-400">Loading data from file...</p>
+      <SLoader />
     </div>
 
     <div v-else class="flex flex-col gap-5">
