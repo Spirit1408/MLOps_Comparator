@@ -12,7 +12,7 @@ const metrics = computed(() => experimentsStore.metricNames)
 </script>
 
 <template>
-  <div class="p-5 rounded-lg max-w-[1000px] w-full mx-auto border border-gray-400 bg-[#3C3C3C]">
+  <div class="p-5 rounded-lg w-[500px] mx-auto border border-gray-400 bg-[#3C3C3C] transition-width duration-500" :class="{ 'w-[1000px]': isDataLoaded}">
     <div v-if="!isDataLoaded && !isLoading" class="h-[200px] flex items-center justify-center">
       <p class="text-gray-400">Charts will be displayed here...</p>
     </div>

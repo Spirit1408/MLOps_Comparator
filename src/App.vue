@@ -6,7 +6,7 @@ import DataCharts from "./components/DataCharts/DataCharts.vue";
 </script>
 
 <template>
-  <div class="flex flex-col gap-10 h-screen py-10">
+  <div class="flex flex-col gap-10 py-10">
     <MainTitle />
 
     <UploadField />

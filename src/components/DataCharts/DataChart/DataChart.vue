@@ -60,7 +60,7 @@ const updateDetailLevel = (level) => {
 </script>
 
 <template>
-  <div v-if="hasData" class="flex bg-black rounded-lg min-h-96">
+  <div v-if="hasData" class="flex bg-black rounded-lg h-full min-h-96">
     <div class="w-80 border-r border-gray-600 rounded-l-lg">
       <div class="p-4">
         <h3 class="font-semibold mb-2 text-sm uppercase tracking-wide">
@@ -87,16 +87,17 @@ const updateDetailLevel = (level) => {
       </div>
     </div>
 
-    <div class="flex-1 p-4">
+    <div class="flex-1 p-4 flex flex-col">
       <MetricChart
         :metric-name="metricName"
         :visible-experiments="visibleExperiments"
         :detail-level="detailLevel"
+        class="flex-1"
       />
     </div>
   </div>
 
-  <div v-else class="flex items-center justify-center bg-gray-900 rounded-lg min-h-96">
+  <div v-else class="flex items-center justify-center bg-gray-900 rounded-lg h-full min-h-96">
     <div class="text-center text-gray-400">
       <p class="text-lg mb-2">No data loaded</p>
       <p class="text-sm">Upload a CSV file to view charts</p>

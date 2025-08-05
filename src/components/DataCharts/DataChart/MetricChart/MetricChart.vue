@@ -133,18 +133,23 @@ watchEffect(() => {
   props.visibleExperiments
   props.detailLevel
 })
-
 </script>
 
 <template>
-  <div>
+  <div class="h-full flex flex-col">
     <div class="flex justify-between items-center mb-2 text-xs text-gray-400">
       <span>{{ getDetailLevelLabel() }}</span>
       <span>{{ dataPointsCount.toLocaleString() }} points</span>
     </div>
 
-    <div class="flex justify-center items-center">
-      <Chart ref="chartRef" type="line" :data="chartData" :options="chartOptions" />
+    <div class="flex-1 w-full">
+      <Chart
+        ref="chartRef"
+        type="line"
+        :data="chartData"
+        :options="chartOptions"
+        class="w-full h-full"
+      />
     </div>
   </div>
 </template>
